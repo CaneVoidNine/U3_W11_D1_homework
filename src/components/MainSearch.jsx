@@ -1,33 +1,23 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Container, Row, Col, Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchJobs, saveSearchValue } from "../redux/actions";
 import Job from "./Job";
 
 const MainSearch = () => {
-  const [query, setQuery] = useState("");
-  const [jobs, setJobs] = useState([]);
-
-  const baseEndpoint =
-    "https://strive-benchmark.herokuapp.com/api/jobs?search=";
+  const dispatch = useDispatch();
+  const query = useSelector((state) => state.value.value);
+  const jobs = useSelector((state) => state.jobs.stock);
 
   const handleChange = (e) => {
-    setQuery(e.target.value);
+    e.preventDefault();
+    dispatch(saveSearchValue(e.target.value));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await fetch(baseEndpoint + query + "&limit=20");
-      if (response.ok) {
-        const { data } = await response.json();
-        setJobs(data);
-      } else {
-        alert("Error fetching results");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(fetchJobs(query));
   };
 
   return (
@@ -35,17 +25,12 @@ const MainSearch = () => {
       <Row>
         <Col xs={10} className="mx-auto my-3">
           <h1>Remote Jobs Search</h1>
-          <Col className="d-flex justify-content-center">
-            <Link style={{ color: "red", pointer: "cursor" }} to="/favourite">
-              Your Favourite list!
-            </Link>
-          </Col>
+          <Link to="./Favs">Favorites</Link>
         </Col>
         <Col xs={10} className="mx-auto">
           <Form onSubmit={handleSubmit}>
             <Form.Control
               type="search"
-              value={query}
               onChange={handleChange}
               placeholder="type and press Enter"
             />

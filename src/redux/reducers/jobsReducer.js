@@ -1,18 +1,17 @@
 import { GET_JOBS } from "../actions";
 
 const initialState = {
-  array: [],
+  stock: [],
 };
-
-const arrayReducer = (state = initialState, action) => {
+const jobsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_JOBS:
       return {
         ...state,
-        array: action.payload,
+        stock: action.payload,
       };
     default:
       return state;
   }
 };
-export default arrayReducer;
+export default jobsReducer;

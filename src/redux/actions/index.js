@@ -1,35 +1,41 @@
-export const ADD_COMPANY = "ADD_COMPANY";
 export const REMOVE_FROM_FAVS = "REMOVE_FROM_FAVS";
+export const ADD_COMPANY = "ADD_COMPANY";
 export const GET_JOBS = "GET_JOBS";
-export const addToFavouritesAction = (jobSelected) => {
+export const SAVE_VALUE = "SAVE_VALUE";
+
+export const addCompanyAction = (jobs) => {
   return {
     type: ADD_COMPANY,
-    payload: jobSelected,
+    payload: jobs,
   };
 };
 
-export const removeFavouritesAction = (i) => {
+export const removeFromFavsAction = (i) => {
+  return { type: "REMOVE_FROM_FAVS", payload: i };
+};
+
+export const saveSearchValue = (value) => {
   return {
-    type: REMOVE_FROM_FAVS,
-    payload: i,
+    type: SAVE_VALUE,
+    payload: value,
   };
 };
 
-export const getJobsAction = () => {
+export const fetchJobs = (endpoint) => {
+  const baseEndpoint =
+    "https://strive-benchmark.herokuapp.com/api/jobs?company=";
+
   return async (dispatch, getState) => {
-    console.log("Fetch");
     try {
-      let response = await fetch(
-        "https://strive-benchmark.herokuapp.com/api/jobs?category=writing&limit=10"
-      );
+      const response = await fetch(baseEndpoint + endpoint + "&limit=20");
       if (response.ok) {
-        let fetchedJobs = await response.json();
+        const { data } = await response.json();
         dispatch({
           type: GET_JOBS,
-          payload: fetchedJobs,
+          payload: data,
         });
       } else {
-        console.log("Error fetching");
+        alert("Error fetching results");
       }
     } catch (error) {
       console.log(error);

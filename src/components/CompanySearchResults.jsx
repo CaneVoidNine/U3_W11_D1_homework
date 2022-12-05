@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Job from "./Job";
@@ -7,12 +8,10 @@ const CompanySearchResults = () => {
   const [jobs, setJobs] = useState([]);
   const params = useParams();
 
-  const baseEndpoint =
-    "https://strive-benchmark.herokuapp.com/api/jobs?company=";
+  const baseEndpoint = "https://strive-jobs-api.herokuapp.com/jobs?company=";
 
   useEffect(() => {
     getJobs();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getJobs = async () => {

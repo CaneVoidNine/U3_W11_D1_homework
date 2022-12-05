@@ -1,5 +1,3 @@
-import { ADD_COMPANY, REMOVE_FROM_FAVS } from "../actions";
-
 const initialState = {
   jobs: {
     content: [],
@@ -8,7 +6,7 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_COMPANY:
+    case "ADD_COMPANY":
       return {
         ...state,
         jobs: {
@@ -16,7 +14,7 @@ const mainReducer = (state = initialState, action) => {
           content: [...state.jobs.content, action.payload],
         },
       };
-    case REMOVE_FROM_FAVS:
+    case "REMOVE_FROM_FAVS":
       return {
         ...state,
         jobs: {
@@ -30,5 +28,4 @@ const mainReducer = (state = initialState, action) => {
       return state;
   }
 };
-
 export default mainReducer;
