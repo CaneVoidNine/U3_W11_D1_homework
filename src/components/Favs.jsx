@@ -12,8 +12,10 @@ export default function Favs() {
 
   return (
     <Container fluid>
+      <div className="d-flex justify-content-center">
+        <h2> Favorites</h2>
+      </div>
       <Row>
-        <h1> Favorites</h1>
         <Col sm={12}>
           <ul style={{ listStyle: "none" }}>
             {jobs.map((job, i) => (
@@ -25,7 +27,7 @@ export default function Favs() {
                       dispatch(removeFromFavsAction(i));
                     }}
                   >
-                    Remove
+                    Delete
                   </Button>
                 </Col>
                 <Col>

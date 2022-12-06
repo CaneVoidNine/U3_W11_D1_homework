@@ -21,8 +21,11 @@ const Job = ({ data }) => {
         </a>
       </Col>
       <Col xs={2}>
-        <Button onClick={() => dispatch(addCompanyAction(data))}>
-          Add to Fav
+        <Button
+          variant="success"
+          onClick={() => dispatch(addCompanyAction(data))}
+        >
+          Add to favourites!
         </Button>
       </Col>
     </Row>

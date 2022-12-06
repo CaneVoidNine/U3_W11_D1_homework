@@ -22,10 +22,12 @@ const MainSearch = () => {
 
   return (
     <Container>
+      <div className="d-flex justify-content-center mt-2">
+        <Link to="./Favs">Favourite List</Link>
+      </div>
       <Row>
-        <Col xs={10} className="mx-auto my-3">
+        <Col xs={10} className="mx-auto my-3 d-flex justify-content-center">
           <h1>Remote Jobs Search</h1>
-          <Link to="./Favs">Favorites</Link>
         </Col>
         <Col xs={10} className="mx-auto">
           <Form onSubmit={handleSubmit}>
